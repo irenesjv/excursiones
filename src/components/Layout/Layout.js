@@ -12,7 +12,7 @@ import Footer from "../Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "../../css/Layout.module.css";
 
-//This is the layout, here goes the web structure. For this app I'll use the breakpoints xs, md and xl
+//This is the layout, here goes the web structure.
 export const Layout = ({ children }) => {
 	// Variable we need to be able to use dispatchers
 	const loginDispatch = useDispatch();
@@ -25,10 +25,10 @@ export const Layout = ({ children }) => {
 		// This function saves the current token and logs the user again in case that the webpage is refreshed. With this the user won´t lose his session
 		const loadToken = () => {
 			// Gets the token from sessionStorage
-			const localToken = sessionStorage["token"];
+			const sessionToken = sessionStorage["token"];
 
 			// Variable that has the url that is needed for the fetch
-			const url = `http://localhost:3001/token/${localToken}`;
+			const url = `http://localhost:3001/token/${sessionToken}`;
 
 			// Variable that saves the options that the fetch needs
 			const options = {
@@ -38,7 +38,7 @@ export const Layout = ({ children }) => {
 			};
 
 			// If there´s a token and that token is not an empty string
-			if (localToken && localToken.trim() !== "") {
+			if (sessionToken) {
 				fetch(url, options)
 					.then((response) => {
 						// If it´s the correct token and the correct user...
